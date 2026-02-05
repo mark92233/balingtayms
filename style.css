@@ -1,0 +1,92 @@
+/* Custom Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&family=Inter:wght@400;600&display=swap');
+
+:root {
+    --paper-white: #ffffff;
+    --ink-black: #1a1a1a;
+}
+
+/* 1. Global Refinements */
+body {
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+/* 2. Thermal Receipt Container */
+#thermal-receipt {
+    background-color: var(--paper-white);
+    background-image: 
+        radial-gradient(circle, #efefef 1px, transparent 1px);
+    background-size: 10px 10px; /* Subtle paper fiber effect */
+    position: relative;
+    transition: transform 0.3s ease;
+    border-left: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+}
+
+/* 3. The Jagged "Torn" Edges */
+.receipt-edge {
+    height: 12px;
+    width: 100%;
+    background: var(--paper-white);
+    /* Creates the serrated look of a real receipt printer */
+    clip-path: polygon(
+        0% 0%, 5% 100%, 10% 0%, 15% 100%, 20% 0%, 25% 100%, 
+        30% 0%, 35% 100%, 40% 0%, 45% 100%, 50% 0%, 55% 100%, 
+        60% 0%, 65% 100%, 70% 0%, 75% 100%, 80% 0%, 85% 100%, 
+        90% 0%, 95% 100%, 100% 0%
+    );
+}
+
+/* 4. The "Approved" Stamp */
+/* This adds a cool, non-cringe validation mark */
+.stamp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    border: 3px solid #f43f5e; /* rose-500 */
+    color: #f43f5e;
+    padding: 0.25rem 0.75rem;
+    font-weight: 900;
+    font-size: 1.5rem;
+    opacity: 0.15;
+    border-radius: 4px;
+    pointer-events: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* 5. Animations */
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Simulated "Printing" jitter */
+.printing-animation {
+    animation: printJitter 2s steps(20);
+}
+
+@keyframes printJitter {
+    0% { clip-path: inset(100% 0 0 0); }
+    100% { clip-path: inset(0 0 0 0); }
+}
+
+/* 6. Custom Dot Grid Background for the page */
+.bg-dot-grid {
+    background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* 7. Mobile Optimization */
+@media (max-width: 640px) {
+    #thermal-receipt {
+        width: 100%;
+        max-width: 280px;
+    }
+}

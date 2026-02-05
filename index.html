@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Day-Pass Protocol | For Ms. Mojado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&family=Space+Mono&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: #fafafa; color: #1a1a1a; overflow-x: hidden; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-mono { font-family: 'Space Mono', monospace; }
+        
+        .shape { position: fixed; z-index: -1; filter: blur(80px); opacity: 0.4; border-radius: 50%; animation: float 20s infinite alternate; }
+        .shape-1 { width: 400px; height: 400px; background: #ffe4e6; top: -10%; left: -10%; }
+        .shape-2 { width: 300px; height: 300px; background: #f0f9ff; bottom: -5%; right: -5%; }
+        @keyframes float { from { transform: translate(0,0); } to { transform: translate(40px, 40px); } }
+
+        .animate-vinyl { animation: spin 4s linear infinite; }
+        .paused { animation-play-state: paused; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        #printer-slot { perspective: 1000px; }
+        #receipt-paper {
+            transform: translateY(-105%);
+            transition: transform 4s cubic-bezier(0.19, 1, 0.22, 1);
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        #receipt-paper.printing { transform: translateY(0); }
+        
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.5); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e5e5e5; border-radius: 10px; }
+        
+        input[type="radio"]:checked + div { border-color: #f43f5e; background: #fff1f2; color: #f43f5e; }
+        .view-section { transition: opacity 0.5s ease, transform 0.5s ease; }
+        .fade-out { opacity: 0; transform: translateY(-20px); pointer-events: none; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+
+    <div id="player-container" class="fixed top-6 inset-x-0 z-50 flex justify-center px-4">
+        <div class="glass-card flex items-center gap-4 p-3 rounded-full shadow-lg w-full max-w-[320px] border border-white/50">
+            <div class="relative w-12 h-12 shrink-0">
+                <div id="vinyl-record" class="w-full h-full rounded-full bg-black border-2 border-slate-900 shadow-md overflow-hidden relative">
+                    <img id="album-art" src="assets/img/image.png" class="w-full h-full object-cover opacity-80">
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full border-2 border-black"></div>
+                </div>
+            </div>
+            <div class="flex-grow min-w-0 text-slate-700">
+                <p class="text-[10px] font-bold tracking-wider truncate uppercase">Now Playing: For Ms. Mojado</p>
+                <div class="flex items-center gap-3 mt-1">
+                    <button onclick="toggleMusic()" class="text-rose-500">
+                        <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>
+                        <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v4a1 1 0 11-2 0V8z" clip-rule="evenodd" /></svg>
+                    </button>
+                    <div class="flex-grow h-1 bg-slate-200 rounded-full overflow-hidden"><div id="music-progress" class="h-full bg-rose-400 w-0 transition-all duration-300"></div></div>
+                </div>
+            </div>
+        </div>
+        <audio id="bg-music" loop><source src="assets/musci.mp3" type="audio/mp3"></audio>
+    </div>
+
+    <section id="view-landing" class="view-section relative z-10 flex flex-col items-center justify-center min-h-screen p-6 text-center pt-24">
+        <div class="space-y-4 mb-12">
+            <p class="font-mono text-[10px] tracking-[0.4em] text-slate-400 uppercase">For Ms. Mojado</p>
+            <h1 class="text-6xl md:text-8xl font-serif italic font-black text-slate-900 tracking-tighter">Day <span class="text-rose-500">Pass.</span></h1>
+            <p class="text-slate-500 font-light max-w-sm mx-auto text-sm leading-relaxed italic">I know you're busy and has a helly of a week. Let's build a date that respects your schedule. You in? Please?</p>
+        </div>
+        <button onclick="startInvitation()" class="px-12 py-4 bg-slate-900 text-white font-bold rounded-2xl transition-all hover:bg-rose-500 shadow-xl hover:scale-105 active:scale-95">Build My Pass</button>
+        <button id="no-button" class="mt-8 text-slate-300 hover:text-rose-400 transition-colors text-xs font-mono uppercase tracking-widest">Reject Access</button>
+    </section>
+
+    <section id="view-survey" class="view-section hidden relative z-10 flex flex-col items-center justify-center min-h-screen p-4 pt-32">
+        <div class="w-full max-w-lg glass-card rounded-[3rem] p-8 shadow-2xl flex flex-col max-h-[80vh]">
+            <div class="mb-4 shrink-0"><h2 class="text-3xl font-bold text-slate-900">The Specs</h2></div>
+
+<form id="date-form" class="space-y-10 overflow-y-auto pr-4 custom-scrollbar flex-grow text-slate-700">
+    <div class="space-y-6">
+        <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest italic">I. Aura Check</p>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">1. Social Battery?</label>
+            <div class="grid grid-cols-1 gap-2">
+                <label class="cursor-pointer"><input type="radio" name="q1" value="Extroverted" class="hidden" checked><div class="p-4 rounded-2xl border border-slate-200 text-sm">Full Extrovert (Let's see people)</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q1" value="Peaceful" class="hidden"><div class="p-4 rounded-2xl border border-slate-200 text-sm">Peace & Quiet (Just us)</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q1" value="Academic Burnout" class="hidden"><div class="p-4 rounded-2xl border border-slate-200 text-sm">Academic Burnout (Low effort / No brain power)</div></label>
+            </div>
+        </div>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">2. Mood Aesthetic?</label>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+                <label class="cursor-pointer"><input type="radio" name="q2" value="Cozy" class="hidden" checked><div class="p-3 text-center rounded-xl border border-slate-200">Cozy / Soft</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q2" value="Trendy" class="hidden"><div class="p-3 text-center rounded-xl border border-slate-200">Trendy / Chic</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q2" value="Productive" class="hidden"><div class="p-3 text-center rounded-xl border border-slate-200">Productive / Focused</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q2" value="Spontaneous" class="hidden"><div class="p-3 text-center rounded-xl border border-slate-200">Spontaneous Chaos</div></label>
+            </div>
+        </div>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">3. Conversation Depth?</label>
+            <select name="q3" class="w-full bg-slate-50 border border-slate-100 p-4 rounded-2xl outline-none text-sm">
+                <option>Non-stop Yapping</option>
+                <option>Comfortable silence</option>
+                <option>Deep life talks</option>
+                <option>Venting about Professors/Thesis</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="space-y-6">
+        <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest italic">II. Audio & Visuals</p>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">4. Soundtrack?</label>
+            <div class="grid grid-cols-1 gap-2">
+                <label class="cursor-pointer"><input type="radio" name="q4" value="OPM Indie" class="hidden" checked><div class="p-3 rounded-xl border border-slate-200 text-sm">Chill OPM</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q4" value="Kpop" class="hidden"><div class="p-3 rounded-xl border border-slate-200 text-sm">K-pop & KRnB</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q4" value="Lofi" class="hidden"><div class="p-3 rounded-xl border border-slate-200 text-sm">Lofi / Study Beats</div></label>
+            </div>
+        </div>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">5. Photo Destination?</label>
+            <select name="q5" class="w-full bg-slate-50 border border-slate-100 p-4 rounded-2xl outline-none text-sm">
+                <option>Main Feed</option>
+                <option>IG Stories / Close Friends</option>
+                <option>BeReal / Photo Dump</option>
+                <option>Camera Roll Only (Gatekeeping us)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="space-y-6">
+        <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest italic">III. Logistics</p>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">6. The Activity?</label>
+            <div class="grid grid-cols-1 gap-2">
+                <label class="cursor-pointer"><input type="radio" name="q6" value="Brunch" class="hidden" checked><div class="p-4 rounded-xl border border-slate-200 text-sm">Brunch & Coffee</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q6" value="Arcade" class="hidden"><div class="p-4 rounded-xl border border-slate-200 text-sm">Arcade & Street Food (De-stressing)</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q6" value="Study" class="hidden"><div class="p-4 rounded-xl border border-slate-200 text-sm">Study Date (Parallel Play/Working together)</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q6" value="Museum" class="hidden"><div class="p-4 rounded-xl border border-slate-200 text-sm">Museum / Art Gallery Walk</div></label>
+            </div>
+        </div>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">7. Cuisine?</label>
+            <select name="q7" class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
+                <option>Samgyupsal (Celebrate finishing a project)</option>
+                <option>Japanese / Ramen</option>
+                <option>Coffee / Dessert only</option>
+                <option>Fast Food (Quick & Iconic)</option>
+            </select>
+        </div>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold italic text-rose-500">8. Mandatory Beverage?</label>
+            <div class="grid grid-cols-3 gap-2">
+                <label class="cursor-pointer"><input type="radio" name="q8" value="Matcha" class="hidden" checked><div class="p-2 text-center text-[10px] border border-slate-200 rounded-lg">Matcha</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q8" value="Coffee" class="hidden"><div class="p-2 text-center text-[10px] border border-slate-200 rounded-lg">Iced Coffee</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q8" value="Fruit" class="hidden"><div class="p-2 text-center text-[10px] border border-slate-200 rounded-lg">Fruit Tea</div></label>
+            </div>
+        </div>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">9. Curfew / Deadline Check?</label>
+            <div class="flex gap-2">
+                <input type="time" name="q9" value="17:00" class="w-1/2 bg-slate-100 p-4 rounded-2xl outline-none">
+                <select name="q9_type" class="w-1/2 bg-slate-100 p-4 rounded-2xl outline-none text-xs">
+                    <option>Strict Curfew</option>
+                    <option>I have a 11:59 PM deadline</option>
+                    <option>Free all night</option>
+                </select>
+            </div>
+        </div>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">10. Transport?</label>
+            <select name="q10" class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
+                <option>Pick-up (Hatid/Sundo)</option>
+                <option>Meet at venue</option>
+                <option>Commute Together (Jeep/Bus talks)</option>
+                <option>Angkas / Grab duo</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="space-y-6 pb-4">
+        <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest italic">IV. Connection</p>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">11. Thoughtful Gesture?</label>
+            <select name="q11" class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
+                <option>Flowers</option>
+                <option>My Favorite Snack</option>
+                <option>Buying me a coffee while I study</option>
+                <option>A playlist made for me</option>
+            </select>
+        </div>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">12. Love Language?</label>
+            <select name="q12" class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
+                <option>Quality Time</option>
+                <option>Acts of Service</option>
+                <option>Words of Affirmation</option>
+                <option>Physical Affection</option>
+            </select>
+        </div>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">13. To feel safe?</label>
+            <input type="text" name="q13" placeholder="Ex: Road-side walk, updating parents" class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
+        </div>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">14. Post-Date tradition?</label>
+            <select name="q14" class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
+                <option>Home safe text</option>
+                <option>Discord/Call till we sleep</option>
+                <option>Planning the next one immediately</option>
+            </select>
+        </div>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">15. Final Check?</label>
+            <div class="p-4 rounded-2xl bg-rose-50 border border-rose-100 text-xs text-rose-500 text-center italic">
+                "I’ve been wanting to ask you out for a while, and Valentine’s felt like the right time. I’d really love to see you, but I value your comfort more than a date. If the answer is no, just skip the button. Either way, you're still one of my favorite people."
+            </div>
+        </div>
+    </div>
+</form>
+
+            <button type="button" onclick="finalizeDate()" class="shrink-0 mt-6 w-full py-5 bg-slate-900 text-white font-bold rounded-2xl transition-all hover:bg-rose-500">GENERATE PASS</button>
+        </div>
+    </section>
+
+    <section id="view-receipt" class="view-section hidden relative z-10 flex flex-col items-center justify-center min-h-screen p-4 pt-32">
+        <div id="printer-slot" class="w-[320px] relative">
+            <div class="h-5 bg-slate-200 rounded-t-xl border-t border-slate-300"></div>
+            <div id="receipt-container" class="overflow-hidden">
+                <div id="receipt-paper" class="p-8 font-mono text-[10px] text-slate-800 relative">
+                    <div class="text-center border-b border-dashed border-slate-300 pb-6 mb-6">
+                        <p class="font-black text-2xl tracking-tighter">DAY-PASS LOG</p>
+                        <p class="text-[8px] opacity-60 mt-1 italic font-bold">Authorized for Ms. Mojado</p>
+                        <p class="text-[8px] opacity-60 uppercase mt-1">Ref: #<span id="r-ref"></span></p>
+                        <p id="r-date" class="text-[9px] mt-1 italic"></p>
+                    </div>
+                    <div id="r-items" class="space-y-3 mb-8"></div>
+                    <div class="border-t border-dashed border-slate-300 pt-6 text-center space-y-4">
+                        <div class="flex justify-between font-black text-sm uppercase"><span>TOTAL:</span><span>ONE PERFECT DAY</span></div>
+                    </div>
+                    <p class="text-[8px] opacity-60 mt-1 italic font-bold">INSTRUCTION: Please download this receipt (or the summary) and send it to me so I can finalize our reservations!
+                        Thank you for letting me spend a day with you. It means the world that you're sharing your time with me amidst the college chaos. ❤️"
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button onclick="downloadReceipt()" class="mt-12 px-10 py-4 bg-slate-900 text-white font-bold rounded-full shadow-lg hover:bg-rose-500">Download Ticket</button>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
