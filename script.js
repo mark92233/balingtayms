@@ -55,22 +55,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const formData = new FormData(form);
     
     const summary = [
-        ['Social Battery', formData.get('q1')],
-        ['Vibe/Aesthetic', formData.get('q2')],
-        ['Comm Level', formData.get('q3')], // Non-stop yapping vs Deep talks
-        ['Soundtrack', formData.get('q4')],
-        ['Hard Launch?', formData.get('q5')], // Main feed vs Gatekeeping
-        ['The Plan', formData.get('q6')],
-        ['Cuisine', formData.get('q7')],
-        ['Mandatory Drink', formData.get('q8')],
-        ['ETA Home', formData.get('q9')],
-        ['Deadline Type', formData.get('q9_type')], // Handle the busy student deadline
-        ['Transport', formData.get('q10')],
-        ['Green Flag Gift', formData.get('q11')],
-        ['Love Language', formData.get('q12')],
-        ['Safe Space', formData.get('q13') || 'Standard Walk-side'],
-        ['Post-Date', formData.get('q14')],
-        ['Final Status', 'Valentines Locked In ❤️']
+        ['Heart Connection', formData.get('q1')], // How she feels "seen"
+        ['Romantic Vibe', formData.get('q2')], // Old Soul vs Modern Muse
+        ['Distance Survival', formData.get('q3')], // What she needs when it's heavy
+        ['Shared Sound', formData.get('q4')], // The soundtrack choice
+        ['The "One Day" Dream', formData.get('q6')], // If I appeared at the door
+        ['The Small Thing', formData.get('q7')], // Smallest thing that makes her smile
+        ['Fuel for Love', formData.get('q8')], // Matcha/Coffee/Late night
+        ['Safe Space Info', formData.get('q13') || 'Emotional Honesty'], // How to make her feel safe
+        ['Post-Call Ritual', formData.get('q14')], // Tradition after hanging up
+        ['Current Distance', 'Bridged by this Map'],
+        ['Final Status', 'More than just miles ❤️']
     ];
 
 
@@ -106,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const receipt = document.getElementById('receipt-paper');
         html2canvas(receipt, { scale: 3 }).then(canvas => {
             const link = document.createElement('a');
-            link.download = `Pass_Mojado.png`;
+            link.download = `Pass_ordales.png`;
             link.href = canvas.toDataURL();
             link.click();
         });

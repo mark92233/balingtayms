@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Day-Pass Protocol | For Ms. Mojado</title>
+    <title>The Heart-Map Protocol | For Ms. Ordales</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&family=Space+Mono&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="flex-grow min-w-0 text-slate-700">
-                <p class="text-[10px] font-bold tracking-wider truncate uppercase">Now Playing: For Ms. Mojado</p>
+                <p class="text-[10px] font-bold tracking-wider truncate uppercase">Syncing Hearts: For Ms. Ordales</p>
                 <div class="flex items-center gap-3 mt-1">
                     <button onclick="toggleMusic()" class="text-rose-500">
                         <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>
@@ -69,162 +69,115 @@
 
     <section id="view-landing" class="view-section relative z-10 flex flex-col items-center justify-center min-h-screen p-6 text-center pt-24">
         <div class="space-y-4 mb-12">
-            <p class="font-mono text-[10px] tracking-[0.4em] text-slate-400 uppercase">For Ms. Mojado</p>
-            <h1 class="text-6xl md:text-8xl font-serif italic font-black text-slate-900 tracking-tighter">Day <span class="text-rose-500">Pass.</span></h1>
-            <p class="text-slate-500 font-light max-w-sm mx-auto text-sm leading-relaxed italic">I know you're busy and has a helly of a week. Let's build a date that respects your schedule. You in? Please?</p>
+            <p class="font-mono text-[10px] tracking-[0.4em] text-slate-400 uppercase">Miles apart, closer at heart</p>
+            <h1 class="text-6xl md:text-8xl font-serif italic font-black text-slate-900 tracking-tighter">Heart <span class="text-rose-500">Map.</span></h1>
+            <p class="text-slate-500 font-light max-w-sm mx-auto text-sm leading-relaxed italic">Since I can't be there to take you out, I want to take a walk through your thoughts instead. Can I learn a bit more about how to love you from here?</p>
         </div>
-        <button onclick="startInvitation()" class="px-12 py-4 bg-slate-900 text-white font-bold rounded-2xl transition-all hover:bg-rose-500 shadow-xl hover:scale-105 active:scale-95">Build My Pass</button>
-        <button id="no-button" class="mt-8 text-slate-300 hover:text-rose-400 transition-colors text-xs font-mono uppercase tracking-widest">Reject Access</button>
+        <button onclick="startInvitation()" class="px-12 py-4 bg-slate-900 text-white font-bold rounded-2xl transition-all hover:bg-rose-500 shadow-xl hover:scale-105 active:scale-95">Open My Heart</button>
+        <button id="no-button" class="mt-8 text-slate-300 hover:text-rose-400 transition-colors text-xs font-mono uppercase tracking-widest">Not today</button>
     </section>
 
     <section id="view-survey" class="view-section hidden relative z-10 flex flex-col items-center justify-center min-h-screen p-4 pt-32">
         <div class="w-full max-w-lg glass-card rounded-[3rem] p-8 shadow-2xl flex flex-col max-h-[80vh]">
-            <div class="mb-4 shrink-0"><h2 class="text-3xl font-bold text-slate-900">The Specs</h2></div>
+            <div class="mb-4 shrink-0"><h2 class="text-3xl font-bold text-slate-900">Romantic Specs</h2></div>
 
 <form id="date-form" class="space-y-10 overflow-y-auto pr-4 custom-scrollbar flex-grow text-slate-700">
     <div class="space-y-6">
-        <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest italic">I. Aura Check</p>
+        <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest italic">I. The Love Language</p>
         <div class="space-y-3">
-            <label class="text-sm font-semibold">1. Social Battery?</label>
+            <label class="text-sm font-semibold">1. How do you feel most "seen"?</label>
             <div class="grid grid-cols-1 gap-2">
-                <label class="cursor-pointer"><input type="radio" name="q1" value="Extroverted" class="hidden" checked><div class="p-4 rounded-2xl border border-slate-200 text-sm">Full Extrovert (Let's see people)</div></label>
-                <label class="cursor-pointer"><input type="radio" name="q1" value="Peaceful" class="hidden"><div class="p-4 rounded-2xl border border-slate-200 text-sm">Peace & Quiet (Just us)</div></label>
-                <label class="cursor-pointer"><input type="radio" name="q1" value="Academic Burnout" class="hidden"><div class="p-4 rounded-2xl border border-slate-200 text-sm">Academic Burnout (Low effort / No brain power)</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q1" value="Long Calls" class="hidden" checked><div class="p-4 rounded-2xl border border-slate-200 text-sm">Long, deep calls until we fall asleep</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q1" value="Unexpected Texts" class="hidden"><div class="p-4 rounded-2xl border border-slate-200 text-sm">Unexpected "thinking of you" texts during the day</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q1" value="Care Packages" class="hidden"><div class="p-4 rounded-2xl border border-slate-200 text-sm">Surprise food or small gifts delivered to my door</div></label>
             </div>
         </div>
         <div class="space-y-3">
-            <label class="text-sm font-semibold">2. Mood Aesthetic?</label>
+            <label class="text-sm font-semibold">2. Your Romantic Aesthetic?</label>
             <div class="grid grid-cols-2 gap-2 text-xs">
-                <label class="cursor-pointer"><input type="radio" name="q2" value="Cozy" class="hidden" checked><div class="p-3 text-center rounded-xl border border-slate-200">Cozy / Soft</div></label>
-                <label class="cursor-pointer"><input type="radio" name="q2" value="Trendy" class="hidden"><div class="p-3 text-center rounded-xl border border-slate-200">Trendy / Chic</div></label>
-                <label class="cursor-pointer"><input type="radio" name="q2" value="Productive" class="hidden"><div class="p-3 text-center rounded-xl border border-slate-200">Productive / Focused</div></label>
-                <label class="cursor-pointer"><input type="radio" name="q2" value="Spontaneous" class="hidden"><div class="p-3 text-center rounded-xl border border-slate-200">Spontaneous Chaos</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q2" value="Old Soul" class="hidden" checked><div class="p-3 text-center rounded-xl border border-slate-200">Old Soul (Letters & Poetry)</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q2" value="Modern Muse" class="hidden"><div class="p-3 text-center rounded-xl border border-slate-200">Modern (Playlists & Memes)</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q2" value="Lowkey" class="hidden"><div class="p-3 text-center rounded-xl border border-slate-200">Lowkey & Simple</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q2" value="Hopeless Romantic" class="hidden"><div class="p-3 text-center rounded-xl border border-slate-200">Hopeless Romantic</div></label>
             </div>
         </div>
+    </div>
+
+    <div class="space-y-6">
+        <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest italic">II. Bridging the Miles</p>
         <div class="space-y-3">
-            <label class="text-sm font-semibold">3. Conversation Depth?</label>
+            <label class="text-sm font-semibold">3. When the distance feels heavy...</label>
             <select name="q3" class="w-full bg-slate-50 border border-slate-100 p-4 rounded-2xl outline-none text-sm">
-                <option>Non-stop Yapping</option>
-                <option>Comfortable silence</option>
-                <option>Deep life talks</option>
-                <option>Venting about Professors/Thesis</option>
+                <option>I need to hear your voice immediately</option>
+                <option>I like to re-read our old messages</option>
+                <option>I look at our photos/screenshots</option>
+                <option>I just want a quiet "I'm here" text</option>
             </select>
+        </div>
+        <div class="space-y-3">
+            <label class="text-sm font-semibold">4. Our Soundtrack?</label>
+            <div class="grid grid-cols-1 gap-2">
+                <label class="cursor-pointer"><input type="radio" name="q4" value="Acoustic" class="hidden" checked><div class="p-3 rounded-xl border border-slate-200 text-sm">Slow, acoustic guitar vibes</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q4" value="Indie OPM" class="hidden"><div class="p-3 rounded-xl border border-slate-200 text-sm">Feeling-heavy Indie OPM</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q4" value="Lofi" class="hidden"><div class="p-3 rounded-xl border border-slate-200 text-sm">Lofi Piano (Just background presence)</div></label>
+                 <label class="cursor-pointer"><input type="radio" name="q4" value="KPop & KRnB" class="hidden"><div class="p-3 rounded-xl border border-slate-200 text-sm">KPop & KRnB</div></label>
+            </div>
         </div>
     </div>
 
     <div class="space-y-6">
-        <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest italic">II. Audio & Visuals</p>
+        <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest italic">III. The "One Day" Dream</p>
         <div class="space-y-3">
-            <label class="text-sm font-semibold">4. Soundtrack?</label>
+            <label class="text-sm font-semibold">5. If I appeared at your door right now?</label>
             <div class="grid grid-cols-1 gap-2">
-                <label class="cursor-pointer"><input type="radio" name="q4" value="OPM Indie" class="hidden" checked><div class="p-3 rounded-xl border border-slate-200 text-sm">Chill OPM</div></label>
-                <label class="cursor-pointer"><input type="radio" name="q4" value="Kpop" class="hidden"><div class="p-3 rounded-xl border border-slate-200 text-sm">K-pop & KRnB</div></label>
-                <label class="cursor-pointer"><input type="radio" name="q4" value="Lofi" class="hidden"><div class="p-3 rounded-xl border border-slate-200 text-sm">Lofi / Study Beats</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q6" value="Long Hug" class="hidden" checked><div class="p-4 rounded-xl border border-slate-200 text-sm">A very long, silent hug</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q6" value="Walk" class="hidden"><div class="p-4 rounded-xl border border-slate-200 text-sm">Walking somewhere while holding hands</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q6" value="Food Date" class="hidden"><div class="p-4 rounded-xl border border-slate-200 text-sm">Finally having that dinner date in person</div></label>
             </div>
         </div>
         <div class="space-y-3">
-            <label class="text-sm font-semibold">5. Photo Destination?</label>
-            <select name="q5" class="w-full bg-slate-50 border border-slate-100 p-4 rounded-2xl outline-none text-sm">
-                <option>Main Feed</option>
-                <option>IG Stories / Close Friends</option>
-                <option>BeReal / Photo Dump</option>
-                <option>Camera Roll Only (Gatekeeping us)</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="space-y-6">
-        <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest italic">III. Logistics</p>
-        <div class="space-y-3">
-            <label class="text-sm font-semibold">6. The Activity?</label>
-            <div class="grid grid-cols-1 gap-2">
-                <label class="cursor-pointer"><input type="radio" name="q6" value="Brunch" class="hidden" checked><div class="p-4 rounded-xl border border-slate-200 text-sm">Brunch & Coffee</div></label>
-                <label class="cursor-pointer"><input type="radio" name="q6" value="Arcade" class="hidden"><div class="p-4 rounded-xl border border-slate-200 text-sm">Arcade & Street Food (De-stressing)</div></label>
-                <label class="cursor-pointer"><input type="radio" name="q6" value="Study" class="hidden"><div class="p-4 rounded-xl border border-slate-200 text-sm">Study Date (Parallel Play/Working together)</div></label>
-                <label class="cursor-pointer"><input type="radio" name="q6" value="Museum" class="hidden"><div class="p-4 rounded-xl border border-slate-200 text-sm">Museum / Art Gallery Walk</div></label>
-            </div>
-        </div>
-        <div class="space-y-3">
-            <label class="text-sm font-semibold">7. Cuisine?</label>
+            <label class="text-sm font-semibold">6. Smallest thing that makes you smile?</label>
             <select name="q7" class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
-                <option>Samgyupsal (Celebrate finishing a project)</option>
-                <option>Japanese / Ramen</option>
-                <option>Coffee / Dessert only</option>
-                <option>Fast Food (Quick & Iconic)</option>
+                <option>Random 'Good Morning' voice notes</option>
+                <option>Seeing you wear something I like</option>
+                <option>Matching profile pictures/headers</option>
+                <option>When you remember a tiny detail I said</option>
             </select>
         </div>
         <div class="space-y-3">
-            <label class="text-sm font-semibold italic text-rose-500">8. Mandatory Beverage?</label>
+            <label class="text-sm font-semibold italic text-rose-500">7. Mandatory "Love" Fuel?</label>
             <div class="grid grid-cols-3 gap-2">
-                <label class="cursor-pointer"><input type="radio" name="q8" value="Matcha" class="hidden" checked><div class="p-2 text-center text-[10px] border border-slate-200 rounded-lg">Matcha</div></label>
-                <label class="cursor-pointer"><input type="radio" name="q8" value="Coffee" class="hidden"><div class="p-2 text-center text-[10px] border border-slate-200 rounded-lg">Iced Coffee</div></label>
-                <label class="cursor-pointer"><input type="radio" name="q8" value="Fruit" class="hidden"><div class="p-2 text-center text-[10px] border border-slate-200 rounded-lg">Fruit Tea</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q8" value="Matcha" class="hidden" checked><div class="p-2 text-center text-[10px] border border-slate-200 rounded-lg">Matcha Date</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q8" value="Coffee" class="hidden"><div class="p-2 text-center text-[10px] border border-slate-200 rounded-lg">Coffee/Talks</div></label>
+                <label class="cursor-pointer"><input type="radio" name="q8" value="Late Night" class="hidden"><div class="p-2 text-center text-[10px] border border-slate-200 rounded-lg">Late Night Call</div></label>
             </div>
-        </div>
-        <div class="space-y-3">
-            <label class="text-sm font-semibold">9. Curfew / Deadline Check?</label>
-            <div class="flex gap-2">
-                <input type="time" name="q9" value="17:00" class="w-1/2 bg-slate-100 p-4 rounded-2xl outline-none">
-                <select name="q9_type" class="w-1/2 bg-slate-100 p-4 rounded-2xl outline-none text-xs">
-                    <option>Strict Curfew</option>
-                    <option>I have a 11:59 PM deadline</option>
-                    <option>Free all night</option>
-                </select>
-            </div>
-        </div>
-        <div class="space-y-3">
-            <label class="text-sm font-semibold">10. Transport?</label>
-            <select name="q10" class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
-                <option>Pick-up (Hatid/Sundo)</option>
-                <option>Meet at venue</option>
-                <option>Commute Together (Jeep/Bus talks)</option>
-                <option>Angkas / Grab duo</option>
-            </select>
         </div>
     </div>
 
     <div class="space-y-6 pb-4">
-        <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest italic">IV. Connection</p>
+        <p class="text-[10px] font-bold text-rose-500 uppercase tracking-widest italic">IV. Deep Connection</p>
         <div class="space-y-3">
-            <label class="text-sm font-semibold">11. Thoughtful Gesture?</label>
-            <select name="q11" class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
-                <option>Flowers</option>
-                <option>My Favorite Snack</option>
-                <option>Buying me a coffee while I study</option>
-                <option>A playlist made for me</option>
-            </select>
+            <label class="text-sm font-semibold">8. To feel safe with me, I should...</label>
+            <input type="text" name="q13" placeholder="Ex: Keep being honest, checking in on me..." class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
         </div>
         <div class="space-y-3">
-            <label class="text-sm font-semibold">12. Love Language?</label>
-            <select name="q12" class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
-                <option>Quality Time</option>
-                <option>Acts of Service</option>
-                <option>Words of Affirmation</option>
-                <option>Physical Affection</option>
-            </select>
-        </div>
-        <div class="space-y-3">
-            <label class="text-sm font-semibold">13. To feel safe?</label>
-            <input type="text" name="q13" placeholder="Ex: Road-side walk, updating parents" class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
-        </div>
-        <div class="space-y-3">
-            <label class="text-sm font-semibold">14. Post-Date tradition?</label>
+            <label class="text-sm font-semibold">9. Our Post-Call tradition?</label>
             <select name="q14" class="w-full bg-slate-50 p-4 rounded-2xl outline-none text-sm">
-                <option>Home safe text</option>
-                <option>Discord/Call till we sleep</option>
-                <option>Planning the next one immediately</option>
+                <option>"I love you" text right after hanging up</option>
+                <option>Sending a song that fits the mood</option>
+                <option>Immediately counting down to the next call</option>
             </select>
         </div>
         <div class="space-y-3">
-            <label class="text-sm font-semibold">15. Final Check?</label>
+            <label class="text-sm font-semibold">10. A Note from Me:</label>
             <div class="p-4 rounded-2xl bg-rose-50 border border-rose-100 text-xs text-rose-500 text-center italic">
-                "I’ve been wanting to ask you out for a while, and Valentine’s felt like the right time. I’d really love to see you, but I value your comfort more than a date. If the answer is no, just skip the button. Either way, you're still one of my favorite people."
+                "Distance is just a test to see how far love can travel. I'm using this to learn the map of your heart because I want to be the best for you, even from miles away. Thank you for letting me in."
             </div>
         </div>
     </div>
 </form>
 
-            <button type="button" onclick="finalizeDate()" class="shrink-0 mt-6 w-full py-5 bg-slate-900 text-white font-bold rounded-2xl transition-all hover:bg-rose-500">GENERATE PASS</button>
+            <button type="button" onclick="finalizeDate()" class="shrink-0 mt-6 w-full py-5 bg-slate-900 text-white font-bold rounded-2xl transition-all hover:bg-rose-500">GENERATE HEART-MAP</button>
         </div>
     </section>
 
@@ -234,22 +187,22 @@
             <div id="receipt-container" class="overflow-hidden">
                 <div id="receipt-paper" class="p-8 font-mono text-[10px] text-slate-800 relative">
                     <div class="text-center border-b border-dashed border-slate-300 pb-6 mb-6">
-                        <p class="font-black text-2xl tracking-tighter">DAY-PASS LOG</p>
-                        <p class="text-[8px] opacity-60 mt-1 italic font-bold">Authorized for Ms. Mojado</p>
-                        <p class="text-[8px] opacity-60 uppercase mt-1">Ref: #<span id="r-ref"></span></p>
+                        <p class="font-black text-2xl tracking-tighter">Proof of Love</p>
+                        <p class="text-[8px] opacity-60 mt-1 italic font-bold">Authorized for Ms. Ordales</p>
+                        <p class="text-[8px] opacity-60 uppercase mt-1">Ref: #Mark From WMSU-<span id="r-ref"></span></p>
                         <p id="r-date" class="text-[9px] mt-1 italic"></p>
                     </div>
                     <div id="r-items" class="space-y-3 mb-8"></div>
                     <div class="border-t border-dashed border-slate-300 pt-6 text-center space-y-4">
-                        <div class="flex justify-between font-black text-sm uppercase"><span>TOTAL:</span><span>ONE PERFECT DAY</span></div>
+                        <div class="flex justify-between font-black text-sm uppercase"><span>TOTAL:</span><span>ZERO MILES APART</span></div>
                     </div>
-                    <p class="text-[8px] opacity-60 mt-1 italic font-bold">INSTRUCTION: Please download this receipt (or the summary) and send it to me so I can finalize our reservations!
-                        Thank you for letting me spend a day with you. It means the world that you're sharing your time with me amidst the college chaos. ❤️"
+                    <p class="text-[8px] opacity-60 mt-4 italic font-bold">INSTRUCTION: Please send this back to me. Every answer you gave is a piece of you I get to keep closer to me. 
+                        Thank you for sharing your heart with me amidst the college chaos. ❤️"
                     </p>
                 </div>
             </div>
         </div>
-        <button onclick="downloadReceipt()" class="mt-12 px-10 py-4 bg-slate-900 text-white font-bold rounded-full shadow-lg hover:bg-rose-500">Download Ticket</button>
+        <button onclick="downloadReceipt()" class="mt-12 px-10 py-4 bg-slate-900 text-white font-bold rounded-full shadow-lg hover:bg-rose-500">Download Map</button>
     </section>
 
     <script src="script.js"></script>
