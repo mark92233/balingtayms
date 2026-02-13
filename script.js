@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const receipt = document.getElementById('receipt-paper');
         html2canvas(receipt, { scale: 3 }).then(canvas => {
             const link = document.createElement('a');
-            link.download = `Pass_ordales.png`;
+            link.download = `Pass_ardales.png`;
             link.href = canvas.toDataURL();
             link.click();
         });
